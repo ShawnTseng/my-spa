@@ -6,7 +6,7 @@
     <hr />
     <h1>{{storeCount}}</h1>
     <h1>{{getStoreCount}}</h1>
-    <button @click="addCount">+1</button>
+    <button @click="add(1)">+1</button>
   </div>
 </template>
 
@@ -35,7 +35,17 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(["addCount"])
+    // ...mapMutations(["addCount"])
+    ...mapMutations({
+      add: "addCount"
+    })
+    // addCount() {
+    //   // this.$store.commit("addCount", 3);
+    //   this.$store.commit({
+    //     type: "addCount",
+    //     step: 2
+    //   });
+    // }
   }
 };
 </script>
