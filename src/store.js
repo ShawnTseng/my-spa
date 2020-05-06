@@ -7,7 +7,8 @@ const store = new Vuex.Store({
     state: {
         count: 0,
         username: '',
-        list: []
+        list: [],
+        todos: []
     },
     mutations: {
         // Only "SYNC"
@@ -18,6 +19,17 @@ const store = new Vuex.Store({
         // addCount(state, payLoad) {
         //     state.count += payLoad.step;
         // }
+    },
+    getters: {
+        // store's computed
+        itemsNotDone(state) {
+            return state.todos.filter(item => !item.done).length;
+        },
+        itemsDone(state, getters) {
+            return state.todos.length - getters.itemsNotDone;
+        },
+        itemsWithID: state =>
+            id => state.todos.filter(item => item.id === id)
     }
 })
 

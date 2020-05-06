@@ -12,7 +12,7 @@
 
 <script>
 import Menu from "./Menu.vue";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapGetters } from "vuex";
 
 export default {
   components: { Menu },
@@ -31,14 +31,22 @@ export default {
       // getStoreCount(state) {
       //   return state.count;
       // }
-      getStoreCount: state => state.count
+      getStoreCount: state => state.count,
+      todos: "todos"
+    }),
+    // ...mapGetters(["itemsNotDone", "itemsWithID"])
+    ...mapGetters({
+      items: "itemsWithID"
     })
   },
   methods: {
     // ...mapMutations(["addCount"])
     ...mapMutations({
       add: "addCount"
-    })
+    }),
+    test() {
+      this.items(2);
+    }
     // addCount() {
     //   // this.$store.commit("addCount", 3);
     //   this.$store.commit({
