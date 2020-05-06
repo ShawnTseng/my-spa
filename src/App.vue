@@ -1,11 +1,15 @@
 <template>
   <div>
-    123
+    <Menu />
+    <img src="./assets/logo.png" />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Menu from "./Menu.vue";
+
 export default {
-  name: "App"
+  components: { Menu }
 };
 </script>
