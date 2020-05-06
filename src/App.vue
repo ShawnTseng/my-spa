@@ -3,6 +3,9 @@
     <Menu />
     <img src="./assets/logo.png" />
     <router-view></router-view>
+    <hr />
+    <h1>{{count}}</h1>
+    <button @click="addCount">+1</button>
   </div>
 </template>
 
@@ -10,6 +13,16 @@
 import Menu from "./Menu.vue";
 
 export default {
-  components: { Menu }
+  components: { Menu },
+  computed: {
+    count() {
+      return this.$store.state.count;
+    }
+  },
+  methods: {
+    addCount() {
+      this.$store.commit("addCount");
+    }
+  }
 };
 </script>
