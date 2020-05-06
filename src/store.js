@@ -3,22 +3,14 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+const url = '';
+
 const store = new Vuex.Store({
     state: {
         count: 0,
         username: '',
         list: [],
         todos: []
-    },
-    mutations: {
-        // Only "SYNC"
-        addCount(state, payLoad = 1) {
-            state.count += payLoad;
-            // Vue.set(state, 'loading', false) // 為定義在state中的做法(爛)
-        }
-        // addCount(state, payLoad) {
-        //     state.count += payLoad.step;
-        // }
     },
     getters: {
         // store's computed
@@ -30,6 +22,35 @@ const store = new Vuex.Store({
         },
         itemsWithID: state =>
             id => state.todos.filter(item => item.id === id)
+    },
+    mutations: {
+        // Only "SYNC"
+        addCount(state, payload = 1) {
+            state.count += payload;
+            // Vue.set(state, 'loading', false) // 為定義在state中的做法(爛)
+        },
+        // addCount(state, payload) {
+        //     state.count += payload.step;
+        // }
+        setTodos(state, todos) {
+            state.todos = todos;
+        }
+    },
+    actions: {
+        // can do "ASYNC", can not change store, need to through mutation
+        // fetchTodos(context) {
+        fetchTodos({ commit, dispatch }, payload) {
+            // const tmp = payload;
+            fetch(`${url}/todos`)
+                .then(response => response.json())
+                .then(todos => {
+                    commit('setTodos', todos);
+                    dispatch('fetchUserInfo')
+                })
+        },
+        fetchUserInfo() {
+
+        }
     }
 })
 

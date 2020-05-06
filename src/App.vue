@@ -12,10 +12,18 @@
 
 <script>
 import Menu from "./Menu.vue";
-import { mapState, mapMutations, mapGetters } from "vuex";
+import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 
 export default {
   components: { Menu },
+  mounted() {
+    // this.$store.dispatch("fetchTodos", { id: 2 });
+    // this.$store.dispatch({
+    //   type: "fetchTodos",
+    //   id: 2
+    // });
+    this.fetch({ id: 2 });
+  },
   data() {
     return {
       localCount: 0
@@ -43,6 +51,10 @@ export default {
     // ...mapMutations(["addCount"])
     ...mapMutations({
       add: "addCount"
+    }),
+    // ...mapActions(["fetchTodos"]),
+    ...mapActions({
+      fetch: "fetchTodos"
     }),
     test() {
       this.items(2);
