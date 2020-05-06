@@ -11,18 +11,15 @@
 
 <script>
 import Menu from "./Menu.vue";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   components: { Menu },
   computed: {
-    count() {
-      return this.$store.state.count;
-    }
+    ...mapState(["count"])
   },
   methods: {
-    addCount() {
-      this.$store.commit("addCount");
-    }
+    ...mapMutations(["addCount"])
   }
 };
 </script>
